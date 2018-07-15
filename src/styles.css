@@ -36,7 +36,7 @@ body {
 .tablero {
   background: beige;
   width: 24rem;
-  height: 24rem;
+  
   display: flex;
   flex-direction: column;
 }
@@ -60,11 +60,11 @@ body {
 
 .position {
   height: 8rem;
-  margin-bottom: 2rem;
   width: 8rem;
   align-items: center;
   align-content: center;
   cursor: pointer;
+  
 }
 
 .position:first-child {
@@ -87,10 +87,25 @@ body {
   background-position: center center;
 }
 
-
-.nextBtn {
-  font-size: 3rem;
-  padding: 1rem 0;
-  text-align: center;
-  width: 18rem;
+.turno {
+  
 }
+
+.turno .position.cross{
+  display: inline-block;
+  border: 0px;
+  height: 1rem;
+  width: 1rem;
+  margin: 0px;
+  background-size: 1rem;
+}
+
+.turno .position.circle{
+  display: inline-block;
+  border: 0px;
+  height: 1rem;
+  width: 1rem;
+  margin: 0px;
+  background-size: 1rem;
+}
+

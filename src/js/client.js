@@ -13,8 +13,15 @@ const state = {
     tablero.className = 'tablero';
 
     const turno = document.createElement('h3');
-    turno.innerHTML = 'Turno del jugador 1';
-  
+    turno.className = 'turno';
+    turno.innerHTML = 'turno de: ';
+    
+    const turnoImg = document.createElement('div');
+    turnoImg.className = 'position';
+    turnoImg.classList.add('cross');
+
+    turno.appendChild(turnoImg);
+
     // Clear previous root content
     if (root.hasChildNodes()) {
       root.innerHTML = null;
@@ -24,6 +31,7 @@ const state = {
     root.appendChild(title);
     root.appendChild(tablero);
     root.appendChild(turno);
+    
 
     lState.positionsy.forEach(function(posy) {
         
@@ -36,12 +44,17 @@ const state = {
             positionElement.className = 'position'; 
             positionElement.addEventListener('click',function () {
                 if(!positionElement.classList.contains('circle') && !positionElement.classList.contains('cross')){
+
                     lState.currentPlayer = (lState.currentPlayer + 1)% 2; 
-                    lState.turno.innerHTML = `Turno del jugador ${lState.currentPlayer}`;
+
                     if (lState.currentPlayer == 0) {
                         positionElement.classList.add('circle');
+                        turnoImg.classList.remove('circle');
+                        turnoImg.classList.add('cross');
                     }else {
                         positionElement.classList.add('cross');
+                        turnoImg.classList.remove('cross');
+                        turnoImg.classList.add('circle');
                     }
                     
                 }else {
