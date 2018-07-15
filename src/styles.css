@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    margin-top: 0;
+  }
+  /**
+  .tablero {
+    background-image: url('Laboratorio2Assets/X.png');
+    height: 20rem;
+    width: 20rem;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .posicion {
+    width: 7rem;
+    height: 7rem;
+    background-image: url('Laboratorio2Assets/O.png');
+    background-repeat: no-repeat;
+    border-style: solid;
+  }
+
+  .tablero .cross {
+    background-image: url('Laboratorio2Assets/X.png');
+  }
+
+  .tablero .circle {
+    background-image: url('Laboratorio2Assets/O.png');
+
+  }
+*/
+
+.tablero {
+  background: beige;
+  width: 24rem;
+  height: 24rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.linea {
+  width: 24rem;
+  height: 8rem;
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.linea:first-child {
+  border-bottom: 5px solid black;
+}
+
+.linea:last-child {
+  border-top: 5px solid black;
+}
+
+
+.position {
+  height: 8rem;
+  margin-bottom: 2rem;
+  width: 8rem;
+  align-items: center;
+  align-content: center;
+  cursor: pointer;
+}
+
+.position:first-child {
+  border-right: 5px solid black;
+}
+
+.position:last-child {
+  border-left: 5px solid black;
+}
+
+.position.circle {
+  background-image: url('Laboratorio2Assets/O.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.position.cross {
+  background-image: url('Laboratorio2Assets/X.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+
+.nextBtn {
+  font-size: 3rem;
+  padding: 1rem 0;
+  text-align: center;
+  width: 18rem;
+}

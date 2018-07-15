@@ -1,108 +1,59 @@
-import expect from 'expect';
-import { createStore } from 'redux';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Immutable from 'immutable';
+const state = {
+    positionsy: [0, 1, 2],
+    positionsx: [0, 1, 2],
+    currentPlayer: 0,
+    tablero: [[0,0,0],[0,0,0],[0,0,0]]
+  };
+  
+  const render = lState => {
+    const title = document.createElement('h1');
+    title.innerHTML = 'SEMAFORO';
+  
+    const tablero = document.createElement('div');
+    tablero.className = 'tablero';
 
-// Javascript the good parts
-
-const Counter = ({ value, incrementAction, decrementAction, removeAction }) => (
-  <div>
-    <h1>{ value }</h1>
-    <button onClick={ incrementAction }>+</button>
-    <button onClick={ decrementAction }>-</button>
-    <button onClick={ removeAction }>x</button>
-  </div>
-);
-
-const CounterList = ({ list }) => (
-  <div>
-    {
-      list.map(
-        (value, i) => (
-          <Counter
-            key={ i }
-            value={ value }
-            index={ i }
-            incrementAction={
-              () => store.dispatch({
-                type: 'INCREMENT',
-                payload: { index: i }
-              })
-            }
-            decrementAction={
-              () => store.dispatch({
-                type: 'DECREMENT',
-                payload: { index: i }
-              })
-            }
-            removeAction={
-              () => store.dispatch({
-                type: 'REMOVE_COUNTER',
-                payload: {
-                  index: i
-                }
-              })
-            }
-          />
-        )
-      )
+    const turno = document.createElement('h3');
+    turno.innerHTML = 'Turno del jugador 1';
+  
+    // Clear previous root content
+    if (root.hasChildNodes()) {
+      root.innerHTML = null;
     }
-    <button onClick={ () => store.dispatch({ type: 'ADD_COUNTER' }) }>Add counter</button>
-  </div>
-);
+  
+    // Main rendering
+    root.appendChild(title);
+    root.appendChild(tablero);
+    root.appendChild(turno);
 
-const validateIndex = (index, list) => 0 <= index && index < list.size;
+    lState.positionsy.forEach(function(posy) {
+        
+        const linea = document.createElement('div');
+        linea.className = 'linea'; 
+        tablero.appendChild(linea);
 
-// Reducer
-const counterList = (state = Immutable.List.of(), action) => {
+        lState.positionsx.forEach(function(posx) {
+            const positionElement = document.createElement('div');
+            positionElement.className = 'position'; 
+            positionElement.addEventListener('click',function () {
+                if(!positionElement.classList.contains('circle') && !positionElement.classList.contains('cross')){
+                    lState.currentPlayer = (lState.currentPlayer + 1)% 2; 
+                    lState.turno.innerHTML = `Turno del jugador ${lState.currentPlayer}`;
+                    if (lState.currentPlayer == 0) {
+                        positionElement.classList.add('circle');
+                    }else {
+                        positionElement.classList.add('cross');
+                    }
+                    
+                }else {
+                    alert('Seleccione otra casilla');
+                }
+            });
+            linea.appendChild(positionElement);
 
-  if(typeof action.payload !== 'undefined'){
-    var { index } = action.payload;
+        })
+    })
+  
   }
-
-  switch(action.type){
-    case 'ADD_COUNTER':
-      return state.push(0);
-
-    case 'REMOVE_COUNTER':
-
-      if(validateIndex(index, state)){
-        return state.delete(index);
-      }
-
-      return state;
-
-    case 'INCREMENT':
-
-      if(validateIndex(index, state)){
-        return state.update(index, (v) => v + 1);
-      }
-
-      return state;
-
-    case 'DECREMENT':
-
-      if(validateIndex(index, state)){
-        return state.update(index,  (v) => v - 1);
-      }
-
-      return state;
-
-    default:
-      return state;
-  }
-}
-
-// createStore: reducer --> store
-const store = createStore(counterList);
-
-const render = () => {
-  ReactDOM.render(
-    <CounterList list={ store.getState() } />,
-    document.getElementById('root')
-  )
-}
-
-store.subscribe(render);
-render();
+  
+  render(state);
+  
