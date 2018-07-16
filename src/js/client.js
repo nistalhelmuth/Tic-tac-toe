@@ -2,6 +2,8 @@ const matriz= [];
 for (var i = 0; i<3; i++){
   matriz[i] = new Array(3);
 }
+
+//estados
 const state = {
   positionsy: [0, 1, 2],
   positionsx: [0, 1, 2],
@@ -10,6 +12,7 @@ const state = {
   tableboard: matriz,
 };
   
+//Funcion despues de obtener un resultado
 function finalizado(jugador) { 
   const nextBtn = document.createElement('button');
   nextBtn.className = 'nextBtn';
@@ -43,6 +46,7 @@ function finalizado(jugador) {
 }
 
 const render = lState => {
+  //definicion de la estructura de la pagina
   const title = document.createElement('h1');
   title.innerHTML = 'Tic-tac-toe';
 
@@ -67,22 +71,26 @@ const render = lState => {
   root.appendChild(tablero);
   root.appendChild(turno);
 
+  //por cada linea
   lState.positionsy.forEach(function(posy) {
       
     const linea = document.createElement('div');
     linea.className = 'linea'; 
     tablero.appendChild(linea);
 
+    //por cada linea
     lState.positionsx.forEach(function(posx) {
 
       const positionElement = document.createElement('div');
       positionElement.className = 'position'; 
 
+      //comportamiento para cada posicion al realizar click
       positionElement.addEventListener('click',function myOnclick() {
         if(!positionElement.classList.contains('circle') && !positionElement.classList.contains('cross')){
 
           lState.currentPlayer = (lState.currentPlayer + 1)% 2; 
 
+          //pintar pieza
           if (lState.currentPlayer == 0) {
             positionElement.classList.add('circle');
             turnoImg.classList.remove('circle');
@@ -95,6 +103,7 @@ const render = lState => {
 
           lState.tableboard[posy][posx]=lState.currentPlayer;
 
+          //verficacion horizontal
           for (var i = 0; i<3; i++){
             let ganar = true;
             const jugador = lState.tableboard[i][0];
@@ -111,6 +120,7 @@ const render = lState => {
             
           };
 
+          //verficacion vertical
           for (var i = 0; i<3; i++) {
             let ganar = true;
             const jugador = lState.tableboard[0][i];
@@ -126,6 +136,7 @@ const render = lState => {
             }
           }
 
+          //verficacion diagonal 1
           let ganar = true;
           let jugador = lState.tableboard[0][0];
           for (var i = 1; i<3; i++){
@@ -139,6 +150,7 @@ const render = lState => {
             ganar=false;
           };
 
+          //verficacion diagonal 2
           ganar = true;
           jugador = lState.tableboard[0][2];
           for (var i = 1; i<3; i++){
@@ -157,12 +169,12 @@ const render = lState => {
         }else {
           alert('Seleccione otra casilla');
         }
+        //empate
         if (lState.numPlays>8){
           finalizado(-1);
         }
 
       });
-
       linea.appendChild(positionElement);
     })
   })
