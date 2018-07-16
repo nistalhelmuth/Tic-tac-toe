@@ -1,5 +1,5 @@
 const matriz= [];
-for (var i = 0; i<3; i++){
+for (let i = 0; i<3; i++){
   matriz[i] = new Array(3);
 }
 
@@ -104,10 +104,10 @@ const render = lState => {
           lState.tableboard[posy][posx]=lState.currentPlayer;
 
           //verficacion horizontal
-          for (var i = 0; i<3; i++){
+          for (let i = 0; i<3; i++){
             let ganar = true;
             const jugador = lState.tableboard[i][0];
-            for (var o = 1; o<3; o++){
+            for (let o = 1; o<3; o++){
               if (jugador != lState.tableboard[i][o] || jugador == undefined) {
                 ganar=false;
               }
@@ -121,10 +121,10 @@ const render = lState => {
           };
 
           //verficacion vertical
-          for (var i = 0; i<3; i++) {
+          for (let i = 0; i<3; i++) {
             let ganar = true;
             const jugador = lState.tableboard[0][i];
-            for (var o = 1; o<3; o++){
+            for (let o = 1; o<3; o++){
               if (jugador != lState.tableboard[o][i] || jugador == undefined) {
                 ganar=false;
               }
@@ -139,7 +139,7 @@ const render = lState => {
           //verficacion diagonal 1
           let ganar = true;
           let jugador = lState.tableboard[0][0];
-          for (var i = 1; i<3; i++){
+          for (let i = 1; i<3; i++){
             if (jugador != lState.tableboard[i][i] || jugador == undefined) {
                 ganar=false;
               }
@@ -153,7 +153,7 @@ const render = lState => {
           //verficacion diagonal 2
           ganar = true;
           jugador = lState.tableboard[0][2];
-          for (var i = 1; i<3; i++){
+          for (let i = 1; i<3; i++){
             if (jugador != lState.tableboard[i][2-i] || jugador == undefined) {
                 ganar=false;
               }
