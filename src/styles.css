@@ -1,25 +1,23 @@
 body {
+    font-family: 'Comfortaa', cursive;
     margin: 0;
     padding: 0;
-  }
-  
-  h1 {
-    margin-top: 0;
+    text-align: center;
   }
 
 .tablero {
   background: beige;
-  width: 24rem;
   display: flex;
   flex-direction: column;
+  margin: auto;
+  width: 24rem;
 }
 
 .linea {
-  width: 24rem;
-  height: 8rem;
   display: flex;
   flex-direction: row;
-  
+  height: 8rem;
+  width: 24rem;
 }
 
 .linea:first-child {
@@ -32,12 +30,15 @@ body {
 
 
 .position {
+  align-content: center;
+  align-items: center;
+  cursor: pointer;
   height: 8rem;
   width: 8rem;
-  align-items: center;
-  align-content: center;
-  cursor: pointer;
-  
+}
+
+.pointer {
+  cursor: not-allowed;
 }
 
 .position:first-child {
@@ -50,35 +51,32 @@ body {
 
 .position.circle {
   background-image: url('Laboratorio2Assets/O.png');
-  background-repeat: no-repeat;
   background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .position.cross {
   background-image: url('Laboratorio2Assets/X.png');
-  background-repeat: no-repeat;
   background-position: center center;
+  background-repeat: no-repeat;
 }
 
-.turno {
-  
-}
 
-.turno .position.cross{
-  display: inline-block;
-  border: 0px;
-  height: 1rem;
-  width: 1rem;
-  margin: 0px;
+
+.turno .position{
   background-size: 1rem;
+  border: 0px;
+  display: inline-block;
+  height: 1rem;
+  margin: 0px;
+  width: 1rem;
 }
 
-.turno .position.circle{
-  display: inline-block;
-  border: 0px;
-  height: 1rem;
-  width: 1rem;
-  margin: 0px;
-  background-size: 1rem;
+.nextBtn {
+  cursor: pointer;
+  font-size: 3rem;
+  padding: 1rem 0;
+  text-align: center;
+  width: 18rem;
 }
 

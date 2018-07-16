@@ -13,34 +13,38 @@ const state = {
 function finalizado(jugador) { 
   const nextBtn = document.createElement('button');
   nextBtn.className = 'nextBtn';
-  nextBtn.innerHTML = 'Next';
+  nextBtn.innerHTML = 'Otra';
 
   root.appendChild(nextBtn);
 
   const turno = document.getElementsByClassName('turno');
   if (jugador != -1) {
-    turno[0].innerHTML = `ha ganado el jugador ${jugador}`;
+    if (jugador == 0 ){
+      turno[0].innerHTML = 'ha ganado circulo!';
+    }else {
+      turno[0].innerHTML = 'ha ganado cruz!';
+    }
+    
   } else {
     turno[0].innerHTML = `los jugadores han empatado`;
   }
 
-  const posiciones = document.getElementsByClassName('position');
-  posiciones[0].addEventListener('click',function(){});
+  const pos = document.getElementsByClassName('position')
+  Array.prototype.forEach.call(pos, function(pos){
+    const nuevo = pos.cloneNode(true);
+    nuevo.classList.add('pointer');
+    pos.parentNode.replaceChild(nuevo, pos);
+    
+  });
   
-  
-
   nextBtn.onclick = () => {
     location.reload();
   };
 }
 
-function myOnclick(){
-
-}
-
 const render = lState => {
   const title = document.createElement('h1');
-  title.innerHTML = 'SEMAFORO';
+  title.innerHTML = 'Tic-tac-toe';
 
   const tablero = document.createElement('div');
   tablero.className = 'tablero';
@@ -63,8 +67,6 @@ const render = lState => {
   root.appendChild(tablero);
   root.appendChild(turno);
 
-  
-  
   lState.positionsy.forEach(function(posy) {
       
     const linea = document.createElement('div');
@@ -72,8 +74,10 @@ const render = lState => {
     tablero.appendChild(linea);
 
     lState.positionsx.forEach(function(posx) {
+
       const positionElement = document.createElement('div');
       positionElement.className = 'position'; 
+
       positionElement.addEventListener('click',function myOnclick() {
         if(!positionElement.classList.contains('circle') && !positionElement.classList.contains('cross')){
 
@@ -102,6 +106,7 @@ const render = lState => {
 
             if (ganar ){
               finalizado(jugador);
+              ganar=false;
             }
             
           };
@@ -117,6 +122,7 @@ const render = lState => {
 
             if (ganar){
               finalizado(jugador);
+              ganar=false;
             }
           }
 
@@ -130,6 +136,7 @@ const render = lState => {
           
           if (ganar){
             finalizado(jugador);
+            ganar=false;
           };
 
           ganar = true;
@@ -142,18 +149,20 @@ const render = lState => {
           
           if (ganar){
             finalizado(jugador);
+            ganar=false;
           }
 
           lState.numPlays +=1;
 
-          if (lState.numPlays>8){
-            finalizado(-1);
-          }
-
         }else {
           alert('Seleccione otra casilla');
         }
+        if (lState.numPlays>8){
+          finalizado(-1);
+        }
+
       });
+
       linea.appendChild(positionElement);
     })
   })
